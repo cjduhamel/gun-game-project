@@ -40,6 +40,7 @@ class Main {
   //initiates and carries out the battle
   public static void initiateBattle(){
     System.out.println("Battle Beginning");
+    int enemySelect = -1;
     while(true){
       //user Selection
       System.out.println("What would you like to do?");
@@ -49,17 +50,19 @@ class Main {
       int userSelect = input.nextInt();
       input.nextLine();
 
+      Soldier selected = null;
+
       //user actions
       //attack
       if(userSelect == 0){
         System.out.println("Who would you like to fire upon?");
-        for(int i = 0; i < enemyTeam.length(); i++){
-          System.out.println(i + ") " + enemyTeam.get(i));
+        for(int i = 0; i < enemyTeam.size(); i++){
+          System.out.println(i + ") " + enemyTeam.get(i).getName());
         }
 
-        int enemySelect = input.nextInt();
+        enemySelect = input.nextInt();
 
-        Soldier selected = enemyTeam.get(enemySelect);
+        selected = enemyTeam.get(enemySelect);
   
         System.out.println("Firing!");
         int attack = myTeam.get(enemySelect).attack();
@@ -68,9 +71,12 @@ class Main {
       }
 
       //win condition
-      if(enemyTeam.get(0).getCurrentHp() < 0){
-        System.out.println("You have Won");
-        break;
+      if(selected.getCurrentHp() < 0){
+        enemyTeam.remove(enemySelect);
+      }
+      
+      if(enemyTeam.size() == 0){
+        System.out.println("You have won");
       }
 
 

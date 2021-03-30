@@ -32,4 +32,6 @@ public class Soldier extends Entity{
   public int getCurrentHp(){
     return currentHp;
   }
+
+  
 }

@@ -4,4 +4,8 @@ public class Entity{
   public Entity(String n){
     name = n;
   }
+
+  public String getName(){
+    return name;
+  }
 }
