@@ -1,3 +1,5 @@
+package gun.entities;
+
 public class Glock26 extends Soldier{
 
   public Glock26(){

@@ -1,4 +1,8 @@
+package gun.game;
 import java.util.Scanner;
+
+import gun.entities.*;
+
 import java.util.ArrayList;
 
 class Main {
@@ -16,7 +20,7 @@ class Main {
   }
 
 
-  //adds the selcted soldiers to each team
+  //adds the selected soldiers to each team
   public static void createTeam(){
     System.out.println("Select the two members you would like in your squad:");
     System.out.println("0) MK-III");
@@ -51,21 +55,32 @@ class Main {
       input.nextLine();
 
       Soldier selected = null;
+      Soldier mySelected = null;
 
       //user actions
       //attack
       if(userSelect == 0){
+    	System.out.println("Who would you like to attack with?");
+    	for(int i = 0; i < myTeam.size(); i++){
+    		System.out.println(i + ") " + myTeam.get(i).getName());
+    	}
+    	
+    	int mySelect = input.nextInt();
+    	input.nextLine();
+    	mySelected = myTeam.get(mySelect);
+    	
         System.out.println("Who would you like to fire upon?");
         for(int i = 0; i < enemyTeam.size(); i++){
-          System.out.println(i + ") " + enemyTeam.get(i).getName());
+        	System.out.println(i + ") " + enemyTeam.get(i).getName());
         }
 
         enemySelect = input.nextInt();
+        input.nextLine();
 
         selected = enemyTeam.get(enemySelect);
   
         System.out.println("Firing!");
-        int attack = myTeam.get(enemySelect).attack();
+        int attack = mySelected.attack();
         selected.damage(attack);
         System.out.println("Enemy Now has " + selected.getCurrentHp() + "hp");
       }
@@ -81,11 +96,25 @@ class Main {
 
 
       //enemy actions
+      
+      //pick random enemy to attack
+      int attackingEnemyInt = (int)(Math.random() * enemyTeam.size());
+      Soldier attackingEnemy = enemyTeam.get(attackingEnemyInt);
+      
+      //pick ally with most health to attack
+      Soldier mostHealth = null;
+      int mostCurrentHealth = 0;
+      for(int i = 0; i < myTeam.size(); i++) {
+    	  if(myTeam.get(i).getCurrentHp() > mostCurrentHealth) {
+    		  mostHealth = myTeam.get(i);
+    	  }
+      }
+      
       //enemy attack
       System.out.println("Enemy Firing! Incoming!");
-      int enemyAttack = enemyTeam.get(0).attack();
-      myTeam.get(0).damage(enemyAttack);
-      System.out.println("We now have " + myTeam.get(0).getCurrentHp());
+      int enemyAttack = attackingEnemy.attack();
+      mostHealth.damage(enemyAttack);
+      System.out.println(mostHealth.getName() + " now has " + mostHealth.getCurrentHp() + "hp.");
 
 
       //win condition
