@@ -1,4 +1,4 @@
-package gun.game;
+package game;
 import java.util.Scanner;
 
 import gun.entities.*;
