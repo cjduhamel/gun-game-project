@@ -1,3 +1,5 @@
+package gun.entities;
+
 public class MkIII extends Soldier{
 
   public MkIII(){

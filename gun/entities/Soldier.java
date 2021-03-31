@@ -1,3 +1,4 @@
+package gun.entities;
 public class Soldier extends Entity{
   
   private int hp;

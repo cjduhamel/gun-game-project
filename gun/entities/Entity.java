@@ -1,3 +1,4 @@
+package gun.entities;
 public class Entity{
   private String name;
 
@@ -7,5 +8,6 @@ public class Entity{
 
   public String getName(){
     return name;
+    
   }
 }
